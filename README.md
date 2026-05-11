@@ -23,6 +23,19 @@ Then open:
 - Django admin: http://localhost:8000/admin/
 - Frontend: http://localhost:5173
 
+## AWS / Remote Deployment
+
+If deploying to AWS Lightsail or EC2:
+
+1. **Firewall:** Open ports `8000` (Backend) and `5173` (Frontend) in your instance's networking settings/security groups.
+2. **Environment:** Update your `.env` file to use the public IP/DNS:
+   ```env
+   DJANGO_ALLOWED_HOSTS=<PUBLIC_IP>
+   CORS_ALLOWED_ORIGINS=http://<PUBLIC_IP>:5173
+   VITE_API_BASE=http://<PUBLIC_IP>:8000/api
+   ```
+3. **Restart:** Run `docker compose up --build -d` to apply changes.
+
 Create database tables after the containers are up:
 
 ```powershell
