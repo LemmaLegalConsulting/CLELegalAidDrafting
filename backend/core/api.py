@@ -3,13 +3,16 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any
 
+import logging
 from django.shortcuts import get_object_or_404
 from ninja import ModelSchema, NinjaAPI, Schema
+
+logger = logging.getLogger(__name__)
 
 from .models import CandidateGround, DraftBlock, DraftGoal, DraftPackage, Fact, LegalSource, Matter
 from .services import audit_matter_for_goal, create_demo_matter, create_draft_package, ensure_seed_data
 
-api = NinjaAPI(title="Legal Aid Drafting API", version="0.1.0")
+api = NinjaAPI(title="Cleveland Legal Aid", version="0.1.0", csrf_exempt=True)
 
 
 class MatterIn(Schema):
@@ -146,8 +149,10 @@ def health(request):
 
 @api.post("/seed")
 def seed(request):
+    logger.info("Seeding demo data")
     ensure_seed_data()
     matter = create_demo_matter()
+    logger.info(f"Created demo matter with ID: {matter.id}")
     return {"matter_id": matter.id}
 
 

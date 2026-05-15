@@ -11,7 +11,10 @@ import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { $createParagraphNode, $createTextNode, $getRoot, EditorState } from "lexical";
 import "./styles.css";
 
-const API_BASE = import.meta.env.VITE_API_BASE ?? "http://localhost:8000/api";
+const API_BASE_RAW = import.meta.env.VITE_API_BASE ?? "http://localhost:8000/api";
+const API_BASE = API_BASE_RAW.includes(",") ? API_BASE_RAW.split(",").pop()?.trim() ?? API_BASE_RAW : API_BASE_RAW;
+
+console.log("Using API_BASE:", API_BASE);
 
 type Matter = {
   id: number;
