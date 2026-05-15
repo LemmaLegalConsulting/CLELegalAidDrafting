@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 from .models import CandidateGround, DraftBlock, DraftGoal, DraftPackage, Fact, LegalSource, Matter
 from .services import audit_matter_for_goal, create_demo_matter, create_draft_package, ensure_seed_data
 
-api = NinjaAPI(title="Cleveland Legal Aid", version="0.1.0", csrf_exempt=True)
+api = NinjaAPI(title="Cleveland Legal Aid", version="0.1.0")
 
 
 class MatterIn(Schema):
