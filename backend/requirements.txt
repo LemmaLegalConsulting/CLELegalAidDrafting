@@ -1,4 +1,4 @@
-Django>=5.2,<6.0
+Django>=6.1.2,<7.0
 django-cors-headers>=4.7,<5.0
 django-ninja>=1.4,<2.0
 dj-database-url>=2.3,<3.0
